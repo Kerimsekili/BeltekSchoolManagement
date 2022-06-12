@@ -1,16 +1,21 @@
-﻿
+﻿@model Ogrenci
 @{
     ViewData["Title"] = "OgrenciEkle";
 }
-
 <h1>Ogrenci Ekleme</h1>
-<form action="/Ogrenci/OgrenciEkle" method="post">
-    <label>Ad:</label>
-    <input type="text" name="Ad" id="Ad"/>
-    <label>Soyad:</label>
-    <input type="text" name="Soyad" id="Soyad"/>
-    <label>Yaş:</label>
-    <input type="number" name="Yas" id="Yas"/>
-    <input type="submit" value="Kaydet" />
+<form asp-Controller="Ogrenci" asp-action="OgrenciEkle" method="post">
+    <div class="mb-3">
+        <label for="Ad" class="form-label">Ad:</label>
+        <input class="form-control" type="text" asp-for="Ad" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Soyad:</label>
+        @Html.TextBoxFor(o=>o.Soyad,new{@class="form-control"})
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Yaş:</label>
+        <input class="form-control" type="number" name="Yas" id="Yas" />
+    </div>
+    <input type="submit" value="Kaydet" class="btn btn-outline-success" />
 </form>
 

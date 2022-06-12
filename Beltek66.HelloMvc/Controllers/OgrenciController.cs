@@ -2,6 +2,7 @@
 using Beltek66.HelloMvc.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Beltek66.HelloMvc.Controllers
 {
@@ -49,25 +50,11 @@ namespace Beltek66.HelloMvc.Controllers
 
         public ViewResult OgrenciListe()
         {
-            var ogrenciler = new List<Ogrenci>();         
-        
-            ogrenciler.Add(new Ogrenci { Ad = "Ali", Soyad = "Veli", Yas = 20 });
-            ogrenciler.Add(new Ogrenci { Ad = "Ahmet", Soyad = "Mehmet", Yas = 25 });
-            ogrenciler.Add(new Ogrenci { Ad = "Hakan", Soyad = "Yılmaz", Yas = 22 });
-
-
-            var ogretmenler = new List<Ogretmen>();
-            ogretmenler.Add(new Ogretmen { Ad = "Ali", Soyad = "Veli", Bolum = "Bilgisayar" });
-            ogretmenler.Add(new Ogretmen { Ad = "Ahmet", Soyad = "Mehmet", Bolum = "Endüstri" });
-
-            var lst = new ListViewModel();
-            lst.Ogretmenler = ogretmenler;
-            lst.Ogrenciler = ogrenciler;
-
-            // ViewData["lst"]= ogrenciler;
-
-
-            // ViewBag.lst = ogretmenler;
+            List<Ogrenci> lst = null;
+            using (var ctx = new OkulDbContext())
+            {
+                lst = ctx.Ogrenciler.ToList();
+            }
             return View(lst);
         }
 
@@ -94,7 +81,11 @@ namespace Beltek66.HelloMvc.Controllers
         [HttpPost]
         public ViewResult OgrenciEkle(Ogrenci ogr)
         {
-
+            using (var ctx=new OkulDbContext())
+            {
+                ctx.Ogrenciler.Add(ogr);    
+                ctx.SaveChanges();
+            }
             return View();
         }
 

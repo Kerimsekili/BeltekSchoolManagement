@@ -1,56 +1,25 @@
-﻿@model ListViewModel
-
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>OgrenciListe</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-
-</head>
-<body>
-    <table class="table table-striped">
-        <thead>
+﻿@model List<Ogrenci>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Ad</th>
+            <th>Soyad</th>
+            <th>Yaş</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ogr in Model)
+        {
             <tr>
-                <th>Ad</th>
-                <th>Soyad</th>
-                <th>Yaş</th>
+                <td>@ogr.Ad</td>
+                <td>@ogr.Soyad</td>
+                <td>@ogr.Yas</td>
+                <td><a class="btn btn-sm btn-primary">Detay</a> <a class="btn btn-sm btn-danger">Sil</a></td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var ogr in Model.Ogrenciler)
-            {
-                <tr>
-                    <td>@ogr.Ad</td>
-                    <td>@ogr.Soyad</td>
-                    <td>@ogr.Yas</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Ad</th>
-                <th>Soyad</th>
-                <th>Bölüm</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var ogr in Model.Ogretmenler)
-            {
-                <tr>
-                    <td>@ogr.Ad</td>
-                    <td>@ogr.Soyad</td>
-                    <td>@ogr.Bolum</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</body>
-</html>
+
+
