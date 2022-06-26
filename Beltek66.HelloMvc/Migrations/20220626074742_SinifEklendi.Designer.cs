@@ -3,14 +3,16 @@ using Beltek66.HelloMvc.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Beltek66.HelloMvc.Migrations
 {
     [DbContext(typeof(OkulDbContext))]
-    partial class OkulDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220626074742_SinifEklendi")]
+    partial class SinifEklendi
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,12 +57,12 @@ namespace Beltek66.HelloMvc.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Sinifad")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Sinifad")
+                        .HasColumnType("int");
 
                     b.HasKey("Sinifid");
 
-                    b.ToTable("Siniflar");
+                    b.ToTable("Sinif");
                 });
 
             modelBuilder.Entity("Beltek66.HelloMvc.Models.Ogrenci", b =>

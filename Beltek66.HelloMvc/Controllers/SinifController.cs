@@ -9,23 +9,22 @@ using Beltek66.HelloMvc.Models;
 
 namespace Beltek66.HelloMvc.Controllers
 {
-    public class OgrenciController : Controller
+    public class SinifController : Controller
     {
         private readonly OkulDbContext _context;
 
-        public OgrenciController(OkulDbContext context)
+        public SinifController(OkulDbContext context)
         {
             _context = context;
         }
 
-        // GET: Ogrenci
+        // GET: Sinif
         public async Task<IActionResult> Index()
         {
-            var okulDbContext = _context.Ogrenciler.Include(o => o.Sinifi);
-            return View(await okulDbContext.ToListAsync());
+            return View(await _context.Siniflar.ToListAsync());
         }
 
-        // GET: Ogrenci/Details/5
+        // GET: Sinif/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,42 +32,39 @@ namespace Beltek66.HelloMvc.Controllers
                 return NotFound();
             }
 
-            var ogrenci = await _context.Ogrenciler
-                .Include(o => o.Sinifi)
-                .FirstOrDefaultAsync(m => m.Ogrenciid == id);
-            if (ogrenci == null)
+            var sinif = await _context.Siniflar
+                .FirstOrDefaultAsync(m => m.Sinifid == id);
+            if (sinif == null)
             {
                 return NotFound();
             }
 
-            return View(ogrenci);
+            return View(sinif);
         }
 
-        // GET: Ogrenci/Create
+        // GET: Sinif/Create
         public IActionResult Create()
         {
-            ViewData["Sinifid"] = new SelectList(_context.Siniflar, "Sinifid", "Sinifad");
             return View();
         }
 
-        // POST: Ogrenci/Create
+        // POST: Sinif/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Ogrenciid,Ad,Soyad,Yas,Sinifid")] Ogrenci ogrenci)
+        public async Task<IActionResult> Create([Bind("Sinifid,Sinifad")] Sinif sinif)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(ogrenci);
+                _context.Add(sinif);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Sinifid"] = new SelectList(_context.Siniflar, "Sinifid", "Sinifid", ogrenci.Sinifid);
-            return View(ogrenci);
+            return View(sinif);
         }
 
-        // GET: Ogrenci/Edit/5
+        // GET: Sinif/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -76,23 +72,22 @@ namespace Beltek66.HelloMvc.Controllers
                 return NotFound();
             }
 
-            var ogrenci = await _context.Ogrenciler.FindAsync(id);
-            if (ogrenci == null)
+            var sinif = await _context.Siniflar.FindAsync(id);
+            if (sinif == null)
             {
                 return NotFound();
             }
-            ViewData["Sinifid"] = new SelectList(_context.Siniflar, "Sinifid", "Sinifid", ogrenci.Sinifid);
-            return View(ogrenci);
+            return View(sinif);
         }
 
-        // POST: Ogrenci/Edit/5
+        // POST: Sinif/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Ogrenciid,Ad,Soyad,Yas,Sinifid")] Ogrenci ogrenci)
+        public async Task<IActionResult> Edit(int id, [Bind("Sinifid,Sinifad")] Sinif sinif)
         {
-            if (id != ogrenci.Ogrenciid)
+            if (id != sinif.Sinifid)
             {
                 return NotFound();
             }
@@ -101,12 +96,12 @@ namespace Beltek66.HelloMvc.Controllers
             {
                 try
                 {
-                    _context.Update(ogrenci);
+                    _context.Update(sinif);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OgrenciExists(ogrenci.Ogrenciid))
+                    if (!SinifExists(sinif.Sinifid))
                     {
                         return NotFound();
                     }
@@ -117,11 +112,10 @@ namespace Beltek66.HelloMvc.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Sinifid"] = new SelectList(_context.Siniflar, "Sinifid", "Sinifid", ogrenci.Sinifid);
-            return View(ogrenci);
+            return View(sinif);
         }
 
-        // GET: Ogrenci/Delete/5
+        // GET: Sinif/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -129,31 +123,30 @@ namespace Beltek66.HelloMvc.Controllers
                 return NotFound();
             }
 
-            var ogrenci = await _context.Ogrenciler
-                .Include(o => o.Sinifi)
-                .FirstOrDefaultAsync(m => m.Ogrenciid == id);
-            if (ogrenci == null)
+            var sinif = await _context.Siniflar
+                .FirstOrDefaultAsync(m => m.Sinifid == id);
+            if (sinif == null)
             {
                 return NotFound();
             }
 
-            return View(ogrenci);
+            return View(sinif);
         }
 
-        // POST: Ogrenci/Delete/5
+        // POST: Sinif/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var ogrenci = await _context.Ogrenciler.FindAsync(id);
-            _context.Ogrenciler.Remove(ogrenci);
+            var sinif = await _context.Siniflar.FindAsync(id);
+            _context.Siniflar.Remove(sinif);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool OgrenciExists(int id)
+        private bool SinifExists(int id)
         {
-            return _context.Ogrenciler.Any(e => e.Ogrenciid == id);
+            return _context.Siniflar.Any(e => e.Sinifid == id);
         }
     }
 }

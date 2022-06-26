@@ -1,0 +1,38 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+
+</head>
+<body>
+    <h3>Öğrenci İşlemleri Ana Sayfası</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Ad</th>
+                <th>Soyad</th>
+                <th>Yaş</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@(((Ogrenci)ViewData["ogrenci"]).Ad)</td>
+                <td>@(((Ogrenci)ViewData["ogrenci"]).Soyad)</td>
+                <td>@(((Ogrenci)ViewData["ogrenci"]).Yas)</td>
+            </tr>   
+             <tr>
+                <td>@ViewBag.student.Ad</td>
+                <td>@ViewBag.student.Soyad</td>
+                <td>@ViewBag.student.Yas</td>
+            </tr>     
+        </tbody>
+    </table>
+</body>
+</html>
