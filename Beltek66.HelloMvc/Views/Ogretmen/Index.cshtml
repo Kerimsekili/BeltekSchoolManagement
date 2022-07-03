@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Beltek66.HelloMvc.Models.Ogrenci>
+﻿@model IEnumerable<Beltek66.HelloMvc.Models.Ogretmen>
 
 @{
     ViewData["Title"] = "Index";
@@ -19,10 +19,7 @@
                 @Html.DisplayNameFor(model => model.Soyad)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Yas)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sinifi)
+                @Html.DisplayNameFor(model => model.Bolum)
             </th>
             <th></th>
         </tr>
@@ -37,15 +34,12 @@
                 @Html.DisplayFor(modelItem => item.Soyad)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Yas)
+                @Html.DisplayFor(modelItem => item.Bolum)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Sinifi.Sinifad)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Ogrenciid">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Ogrenciid">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Ogrenciid">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.OgretmenId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.OgretmenId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.OgretmenId">Delete</a>
             </td>
         </tr>
 }

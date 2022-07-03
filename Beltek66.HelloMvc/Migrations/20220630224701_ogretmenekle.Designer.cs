@@ -3,41 +3,22 @@ using Beltek66.HelloMvc.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Beltek66.HelloMvc.Migrations
 {
     [DbContext(typeof(OkulDbContext))]
-    partial class OkulDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220630224701_ogretmenekle")]
+    partial class ogretmenekle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Beltek66.HelloMvc.Models.Ders", b =>
-                {
-                    b.Property<int>("DersId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Bolum")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DersAdi")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("OgretmenId")
-                        .HasColumnType("int");
-
-                    b.HasKey("DersId");
-
-                    b.ToTable("Ders");
-                });
 
             modelBuilder.Entity("Beltek66.HelloMvc.Models.Ogrenci", b =>
                 {

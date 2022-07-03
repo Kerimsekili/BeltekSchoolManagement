@@ -8,5 +8,6 @@ namespace Beltek66.HelloMvc.Models
         public string Sinifad { get; set; }
 
         public ICollection<Ogrenci> Ogrenciler { get; set; }
+        
     }
 }

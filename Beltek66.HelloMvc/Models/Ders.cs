@@ -2,18 +2,18 @@
 
 namespace Beltek66.HelloMvc.Models
 {
-    public class Ogretmen
+    public class Ders
     {
-        public int OgretmenId { get; set; }
+        public int DersId { get; set; }
         [Display(Name = "Adı")]//Attribute
-        public string Ad { get; set; }
+        public string DersAdi { get; set; }
 
-        [Display(Name = "Soyadı")]
-        public string Soyad { get; set; }
+        [Display(Name = "Dersi Veren Öğretmen")]
+        public int OgretmenId { get; set; }
 
         [Display(Name = "Bolum")]
         public string Bolum { get; set; }
-        
+
 
     }
 }
