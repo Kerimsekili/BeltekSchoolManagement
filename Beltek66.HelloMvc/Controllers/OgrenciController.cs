@@ -106,7 +106,7 @@ namespace Beltek66.HelloMvc.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OgrenciExists(ogrenci.Ogrenciid))
+                    if (!StudentExist(ogrenci.Ogrenciid))
                     {
                         return NotFound();
                     }
@@ -145,15 +145,15 @@ namespace Beltek66.HelloMvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var ogrenci = await _context.Ogrenciler.FindAsync(id);
-            _context.Ogrenciler.Remove(ogrenci);
+            var student = await _context.Ogrenciler.FindAsync(id);
+            _context.Ogrenciler.Remove(student);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool OgrenciExists(int id)
+        private bool StudentExist(int id)
         {
-            return _context.Ogrenciler.Any(e => e.Ogrenciid == id);
+            return _context.Ogrenciler.Any( c=> c.Ogrenciid == id);
         }
     }
 }

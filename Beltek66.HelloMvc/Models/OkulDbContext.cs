@@ -14,7 +14,7 @@ namespace Beltek66.HelloMvc.Models
             optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-VJAHNT7;Initial Catalog=MvcOkulDb;Integrated Security=true");
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)  
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Ogrenci>().ToTable("tblOgrenciler");
